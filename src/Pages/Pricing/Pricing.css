@@ -1,0 +1,7 @@
+.pricing-table{
+    min-height: 500px;
+    height: 80vh;
+    max-height: 80vh;
+    width: 100%;
+    padding: 2%;
+}

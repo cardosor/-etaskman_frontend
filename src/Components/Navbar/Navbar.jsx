@@ -1,12 +1,16 @@
 import React from 'react';
+import { Link } from 'react-router-dom'
 
-const Navbar = () => {
+const Navbar = ({ user, setUser, logout }) => {
+    console.log("nav bar ", user)
     return (
+
+
         <>
             <nav className="navbar navbar-expand-lg fw-bold bg-dark fixed-top">
                 <div className="container">
-                    <a className="navbar-brand text-light" href="#">ETaskMan</a>
-                    <button className="navbar-toggler"
+                    <Link className="navbar-brand text-light" to="/">ETaskMan</Link>
+                    <button className="navbar-toggler bg-light"
                         type="button"
                         data-bs-toggle="collapse"
                         data-bs-target="#navbarToggler"
@@ -18,14 +22,23 @@ const Navbar = () => {
                     <div className="collapse navbar-collapse fw-bold fs-5" id="navbarToggler">
                         <ul className="navbar-nav ms-auto">
                             <li className="nav-item">
-                                <a className="nav-link fw-bold fs-5 text-light" href="#">Pricing</a>
+                                <Link className="nav-link fw-bold fs-5 text-light" to="/pricing">Pricing</Link>
                             </li>
-                            <li className="nav-item">
-                                <a className="nav-link fw-bolder fs-5 text-light" href="#">Sign Up</a>
-                            </li>
-                            <li className="nav-item">
-                                <a className="nav-link fw-bolder fs-5 text-light" href="#">Log In</a>
-                            </li>
+                            {
+                                user ?
+                                    <li className="nav-item">
+                                        <Link className="nav-link fw-bolder fs-5 text-light" onClick={()=>{setUser(null);logout()}} to="/">Log Out</Link>
+                                    </li>
+                                    :
+                                    <>
+                                        <li className="nav-item">
+                                            <Link className="nav-link fw-bolder fs-5 text-light" to="/signup">Sign Up</Link>
+                                        </li>
+                                        <li className="nav-item">
+                                            <Link className="nav-link fw-bolder fs-5 text-light" to="/login">Log In</Link>
+                                        </li>
+                                    </>
+                            }
                         </ul>
                     </div>
                 </div>

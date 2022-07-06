@@ -18,8 +18,8 @@
 
 .banner-btn{
   width: 200px;
-  height: 70px;
-  font-size: 2rem;
+  height: 50px;
+  font-size: 1.5rem;
 }
 
 .features .features-img{
@@ -28,9 +28,5 @@
   background-image: url(../public/images/featuresbg.jpg);
   background-position: center;
   background-size: cover;
-}
-
-.footer-list{
-  list-style-type: none;
 }
 
