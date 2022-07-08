@@ -1,0 +1,49 @@
+.project-card {
+    height: 200px;
+    width: 400px;
+}
+
+:root {
+    --primary:   blue;
+    --secondary: #6c757d;
+    --success:   green;
+    --info:      cyan;
+    --warning:   yellow;
+    --danger:    red;
+    --light:     #f8f9fa;
+    --dark:      #212529;
+
+}
+
+
+.border-left-primary {
+    border-left: .25rem solid var(--primary) !important
+}
+
+.border-left-secondary {
+    border-left: .25rem solid var(--secondary) !important
+}
+
+.border-left-success {
+    border-left: .25rem solid var(--success) !important
+}
+
+.border-left-warning {
+    border-left: .25rem solid var(--warning) !important
+}
+
+.border-left-info {
+    border-left: .25rem solid var(--info) !important
+}
+
+.border-left-danger {
+    border-left: .25rem solid var(--danger) !important
+}
+
+.border-left-light {
+    border-left: .25rem solid var(--light) !important
+}
+
+.border-left-dark {
+    border-left: .25rem solid var(--dark) !important
+}

@@ -1,15 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
+import { useState } from 'react';
 
-const Navbar = ({ user, setUser, logout }) => {
+const Navbar = ({ user, setUser, logout, page, setPage }) => {
     console.log("nav bar ", user)
+    console.log("page ", page)
     return (
-
-
         <>
             <nav className="navbar navbar-expand-lg fw-bold bg-dark fixed-top">
                 <div className="container">
-                    <Link className="navbar-brand text-light" to="/">ETaskMan</Link>
+                    <Link className="navbar-brand text-light" to="/" onClick={()=> setPage("home")}>ETaskMan</Link>
                     <button className="navbar-toggler bg-light"
                         type="button"
                         data-bs-toggle="collapse"
@@ -21,21 +21,32 @@ const Navbar = ({ user, setUser, logout }) => {
                     </button>
                     <div className="collapse navbar-collapse fw-bold fs-5" id="navbarToggler">
                         <ul className="navbar-nav ms-auto">
-                            <li className="nav-item">
-                                <Link className="nav-link fw-bold fs-5 text-light" to="/pricing">Pricing</Link>
-                            </li>
+
                             {
                                 user ?
-                                    <li className="nav-item">
-                                        <Link className="nav-link fw-bolder fs-5 text-light" onClick={()=>{setUser(null);logout()}} to="/">Log Out</Link>
-                                    </li>
+                                    <>
+                                        <li className="nav-item">
+                                            <Link className={`nav-link fw-bolder fs-5 ${page === "profile" ? 'text-warning' : 'text-light' } btn btn-primary user-account-btn`}  aria-current="page" to="/profile"><i className={`bi bi-person-circle ${page === "profile" ? 'text-warning' : 'text-light' }`}> </i>{user.type.toUpperCase()}</Link>
+                                            
+                                        </li>
+
+                                        <li className="nav-item">
+                                            <Link className={`nav-link fw-bolder fs-5 ${page === "dashboard" ? 'text-warning' : 'text-light' }`} to="/dashboard">Dashboard</Link>
+                                        </li>
+                                        <li className="nav-item">
+                                            <Link className="nav-link fw-bolder fs-5 text-light" onClick={() => { setUser(null); logout() }} to="/">Log Out</Link>
+                                        </li>
+                                    </>
                                     :
                                     <>
                                         <li className="nav-item">
-                                            <Link className="nav-link fw-bolder fs-5 text-light" to="/signup">Sign Up</Link>
+                                            <Link className= {`nav-link fw-bolder fs-5 ${page === "pricing" ? 'text-warning' : 'text-light' }`} to="/pricing">Pricing</Link>
                                         </li>
                                         <li className="nav-item">
-                                            <Link className="nav-link fw-bolder fs-5 text-light" to="/login">Log In</Link>
+                                            <Link className={`nav-link fw-bolder fs-5 ${page === "signup" ? 'text-warning' : 'text-light' }`} to="/signup">Sign Up</Link>
+                                        </li>
+                                        <li className="nav-item">
+                                            <Link className={`nav-link fw-bolder fs-5 ${page === "login" ? 'text-warning' : 'text-light' }`} to="/login">Log In</Link>
                                         </li>
                                     </>
                             }

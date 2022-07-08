@@ -1,11 +1,15 @@
 import './LogIn.css';
 import React from 'react';
 import { useNavigate } from 'react-router-dom'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { login } from '../../Utilities/users-service'
 import { Link } from 'react-router-dom'
 
-const LogIn = ({ setUser }) => {
+const LogIn = ({ setUser, setPage }) => {
+
+    useEffect(() => {
+        setPage("login");
+    }, [])
 
     const navigate = useNavigate();
     const [inputType, setInputType] = useState("password");
@@ -31,13 +35,13 @@ const LogIn = ({ setUser }) => {
             try {
                 const user = await login(credendials);
                 if (user === "bad credentials") {
-                    setMessage("The username or password is incorrect.");
+                    setMessage("The email or password is incorrect.");
                 } else {
                     if (user.active === true) {
                         setUser(user);
-                        navigate('/');
+                        navigate('/dashboard');
                     } else {
-                        throw new Error;
+                        throw new Error('User not active');
                     }
                 }
             } catch (error) {
@@ -96,8 +100,8 @@ const LogIn = ({ setUser }) => {
                     </div>
                     {
                         message &&
-                        <div class="col-md-4 mt-2 p-2 w-100">
-                            <div class="alert alert-danger text-center" role="alert">
+                        <div className="col-md-4 mt-2 p-2 w-100">
+                            <div className="alert alert-danger text-center" role="alert">
                                 {message}
                             </div>
                         </div>
@@ -106,7 +110,7 @@ const LogIn = ({ setUser }) => {
                         <button className="btn btn-primary mt-2 fw-bold" type="submit">Log In</button>
                     </div>
                     <div className="col-4 text-center w-100">
-                        <p className="mt-5 fw-bold" >Don't have an account? <Link class="text-decoration-none" to="/signup">Create an account</Link>.</p>
+                        <p className="mt-5 fw-bold" >Don't have an account? <Link className="text-decoration-none" to="/signup">Create an account</Link>.</p>
                     </div>
                 </form>
             </div>

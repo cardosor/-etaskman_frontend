@@ -30,3 +30,11 @@
   background-size: cover;
 }
 
+.user-account-btn{
+  width: 120px;
+}
+
+.navbar{
+  z-index: 1;
+}
+

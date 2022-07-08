@@ -1,21 +1,26 @@
-import React from 'react';
+import { React, useEffect } from 'react'
 import './Pricing.css'
 
-const Pricing = () => {
+const Pricing = ({ setPage }) => {
+
+    useEffect(() => {
+        setPage("pricing");
+    }, [])
+
     return (
         <div>
-            <div class="container-fluid pricing-table">
-                <div class="container p-5">
-                    <div class="row mt-4">
-                        <div class="col-lg-6 col-md-12 mt-4">
-                            <div class="card card1 h-100">
-                                <div class="card-body">
+            <div className="container-fluid pricing-table">
+                <div className="container p-5">
+                    <div className="row mt-4">
+                        <div className="col-lg-6 col-md-12 mt-4">
+                            <div className="card card1 h-100">
+                                <div className="card-body">
 
-                                    <h5 class="card-title">Basic</h5>
-                                    <small class='text-muted'>Individual</small>
+                                    <h5 className="card-title">Basic</h5>
+                                    <small className='text-muted'>Individual</small>
                                     <br></br>
-                                    <span class="h2">$0</span>/month
-                                    <div class="d-grid my-3"></div>
+                                    <span className="h2">$0</span>/month
+                                    <div className="d-grid my-3"></div>
                                     <ul>
                                         <li>Max of 3 Projects</li>
                                         <li>Unlimited Tasks</li>
@@ -28,15 +33,15 @@ const Pricing = () => {
                             </div>
 
                         </div>
-                        <div class="col-lg-6 col-md-12 mt-4">
-                            <div class="card card1 h-100">
-                                <div class="card-body">
+                        <div className="col-lg-6 col-md-12 mt-4">
+                            <div className="card card1 h-100">
+                                <div className="card-body">
 
-                                    <h5 class="card-title">Pro</h5>
-                                    <small class='text-muted'>Individual</small>
+                                    <h5 className="card-title">Pro</h5>
+                                    <small className='text-muted'>Individual</small>
                                     <br></br>
-                                    <span class="h2">$0.99</span>/month
-                                    <div class="d-grid my-3"></div>
+                                    <span className="h2">$0.99</span>/month
+                                    <div className="d-grid my-3"></div>
                                     <ul>
                                         <li>Unlimited Projects</li>
                                         <li>Unlimited Tasks</li>
@@ -46,9 +51,9 @@ const Pricing = () => {
                             </div>
                         </div>
                         <div className='row'>
-                            <div class="col-lg-6 col-md-12">
+                            <div className="col-lg-6 col-md-12">
                             </div>
-                            <div class="col-lg-6 col-md-12 ps-4">
+                            <div className="col-lg-6 col-md-12 ps-4">
                                 <p>*Team members do not need to have a Pro account.</p>
                             </div>
                         </div>

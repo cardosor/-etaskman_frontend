@@ -1,14 +1,19 @@
 import './SignUp.css';
 import React from 'react';
 import { useNavigate } from 'react-router-dom'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { signUp } from '../../Utilities/users-service'
 import { Link } from 'react-router-dom'
 
-const SignUp = ({ setUser }) => {
+const SignUp = ({ setUser, setPage }) => {
+
+    useEffect(() => {
+        setPage("signup");
+    }, [])
 
     const navigate = useNavigate();
     const [inputType, setInputType] = useState("password");
+    const [message, setMessage] = useState("")
     const [newUser, setNewUser] = useState({
         fname: '',
         lname: '',
@@ -19,6 +24,8 @@ const SignUp = ({ setUser }) => {
 
     const handleChange = e => {
         console.log(newUser)
+        if(message) setMessage("");
+        
         setNewUser({
             ...newUser,
             [e.target.name]: e.target.value
@@ -27,17 +34,23 @@ const SignUp = ({ setUser }) => {
 
     const handleSubmit = async e => {
         e.preventDefault()
-        console.log(newUser)
-        try {
-            const res = await signUp(newUser);
-            setUser(res);
-            if (res.active === true) navigate('/')
-        } catch (error) {
-            console.log(error)
+        if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(newUser.email)) {
+            setMessage("Please enter a valid email address.");
+        }else if(newUser.password.length < 6){
+            setMessage("Passwords must be at least 6 characters long.");
+        }else{
+            try {
+                const res = await signUp(newUser);
+                setUser(res);
+                if (res.active === true) navigate('/dashboard')
+            } catch (error) {
+                console.log(error)
+            }
         }
+        
     }
 
-    const showPassword = () => {
+    const showPassword = ( { setPage } ) => {
         if (inputType === 'password') {
             setInputType('text')
         } else {
@@ -48,8 +61,8 @@ const SignUp = ({ setUser }) => {
     return (
         <>
             <div className="row signup-form d-flex justify-content-center align-items-center">
-                <form className="col-md-4 g-3 needs-validation mx-auto" onSubmit={handleSubmit}>
-                    <div className="col-md-4 p-2 w-100">
+                <form className="col-md-4 g-3 needs-validation mx-auto noValidate" onSubmit={handleSubmit}>
+                    <div className="col-md-4 mt-2 p-2 w-100">
                         <label htmlFor="validationCustom01" className="form-label fw-bold">First name</label>
                         <input type="text" onChange={handleChange} className="form-control" id="validationCustom01" name="fname" required />
                         <div className="valid-feedback">
@@ -94,11 +107,20 @@ const SignUp = ({ setUser }) => {
                         </div>
                     </div>
 
+                    {
+                        message &&
+                        <div className="col-md-4 mt-2 p-2 w-100">
+                            <div className="alert alert-danger text-center" role="alert">
+                                {message}
+                            </div>
+                        </div>
+                    }
+
                     <div className="col-4 text-center w-100">
                         <button className="btn btn-primary mt-2 fw-bold" type="submit">Sign Up</button>
                     </div>
                     <div className="col-4 text-center w-100">
-                        <p className="mt-5 fw-bold" >Already have an account? <Link class="text-decoration-none" to="/login">Log In</Link>.</p>
+                        <p className="mt-5 fw-bold" >Already have an account? <Link className="text-decoration-none" to="/login">Log In</Link>.</p>
                     </div>
                 </form>
 

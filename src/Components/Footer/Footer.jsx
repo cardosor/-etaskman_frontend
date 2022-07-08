@@ -8,7 +8,7 @@ const Footer = () => {
                 <div className="container">
                     <div className='row'>
                         <div className='col-lg-4 col-md-6 col-sm-12'>
-                            <h1 className="mt-3 text-light fw-bold">Easy Task Manager</h1>
+                            <h4 className="mt-3 text-light fw-bold">Easy Task Manager</h4>
                             <ul className="footer-list">
                                 <li className='fw-semibold text-light'>Simple tool to manage tasks for any project. 
                                 Based in Kanban methodology which is a popular Lean workflow management method for defining, managing, and improving services.
@@ -16,14 +16,14 @@ const Footer = () => {
                             </ul>
                         </div>
                         <div className='col-lg-4 col-md-6 col-sm-12'>
-                            <h1 className="mt-3 text-light fw-bold">Constat Us</h1>
+                            <h4 className="mt-3 text-light fw-bold">Constat Us</h4>
                             <ul className="footer-list">
                                 <li className='fw-semibold text-light'>contact@etaskman.com</li>
                                 <li className='fw-semibold text-light'>support@etaskman.com</li>
                             </ul>
                         </div>
                         <div className='col-lg-4 col-md-6 col-sm-12'>
-                            <h1 className="mt-3 text-light fw-bold">More</h1>
+                            <h4 className="mt-3 text-light fw-bold">More</h4>
                             <ul className="footer-list">
                                 <li className='fw-semibold text-light'>Privacy Policy</li>
                                 <li className='fw-semibold text-light'>Terms</li>
