@@ -16,9 +16,9 @@ const Footer = () => {
                             </ul>
                         </div>
                         <div className='col-lg-4 col-md-6 col-sm-12'>
-                            <h4 className="mt-3 text-light fw-bold">Constat Us</h4>
+                            <h4 className="mt-3 text-light fw-bold">Contatc Us</h4>
                             <ul className="footer-list">
-                                <li className='fw-semibold text-light'>contact@etaskman.com</li>
+                                <li className='fw-semibold text-light'>contatc@etaskman.com</li>
                                 <li className='fw-semibold text-light'>support@etaskman.com</li>
                             </ul>
                         </div>

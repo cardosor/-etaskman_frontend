@@ -5,13 +5,63 @@
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 1000;
-    border-radius: 5%;
+    border-radius: 5px;
     margin-left: 1px;
 }
-@media only  screen and (max-width:600px) {
-    .project-form{
-        width: 100%;
-    }
+
+.work-flow-container{
+    display: flex;
+    flex-direction: row;
+    flex-wrap:  wrap;
+    justify-content:space-evenly;
+    align-content: flex-start;
+}
+
+.our-work-process {
+    background-color: #3287c0;
+    color: #fff;
+    text-align: center;
+    padding: 5px 0px 5px 0px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+.our-work-process h2 {
+    font-size: 24px;
+}
+
+.step-box{
+   margin-top: 20px;
+}
+
+.our-work-process .step-number {
+    background-color: #3498db;
+    font-size: 20px;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    padding: 0px;
+    display: inline-block;
+    border: 3px solid #fff;
+    position: relative;
+    top: -25px;
+    right: -55px;
+    margin-left: -30px;
+    align-self: center;
+}
+
+.our-work-process .step-name {
+    width: 80px;
+    height: 50px;
+    border: 3px solid #ffff;
+    border-radius: 5px;
+    margin: 0 auto;
+    background-color: #3287c0;
+    text-align: center;
+}
+
+.our-work-process .step-name:focus  {
+    outline: none;
+    background-color: white;
 }
 
 
@@ -32,4 +82,19 @@
     gap: 10px;
     justify-content: center;
     align-content: flex-start;
+}
+
+.workflow-text{
+    margin-left: 10px;
+    margin-right: 10px;
+    font-size: 1.5rem;
+    text-transform: Uppercase;
+    font-weight: bold;
+}
+
+
+@media only  screen and (max-width:600px) {
+    .project-form{
+        width: 100%;
+    }
 }

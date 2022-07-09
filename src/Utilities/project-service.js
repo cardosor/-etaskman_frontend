@@ -25,33 +25,39 @@ const createProject = async project => {
 }
 
 
-const getUser = () => {
-    const token = getToken();
-    return token ? JSON.parse(atob(token.split('.')[1])).user : null;
-}
-
-const logout = () => {
-    const token = localStorage.getItem('token');
-    if(!token) return null;
-    localStorage.removeItem('token');
-    return null;
-}
-
-const signUp = async user => {
+const updateProject = async project => {
+    console.log("updateProject");
     try{
-        const token = await axios.post(`${BASE_URL}/`, user);
-        //Persit the token using window localStorage
-        localStorage.setItem('token',token.data);
-        return getUser();
+        console.log(`${BASE_URL}/${project._id}`)
+        const response = await axios.put(`${BASE_URL}/${project._id}`, project, options);
+        //created project
+        console.log(response);
+        return response;
     }catch(e){
-        console.log(e);
+        
+        console.log("e ", e);
+        return e.response.request.statusText.toLowerCase();
+    }
+}
+
+const deleteProject = async project => {
+    console.log("deleteProject");
+    try{
+        console.log(`${BASE_URL}/${project._id}`)
+        const response = await axios.delete(`${BASE_URL}/${project._id}`, options);
+        //created project
+        console.log(response);
+        return response;
+    }catch(e){
+        
+        console.log("e ", e);
+        return e.response.request.statusText.toLowerCase();
     }
 }
 
 
 export {
     createProject,
-    logout,
-    getUser,
-    signUp
+    updateProject,
+    deleteProject
 }

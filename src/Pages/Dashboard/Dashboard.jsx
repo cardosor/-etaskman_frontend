@@ -1,30 +1,24 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
-import Project from '../../Components/Project/Project';
+import ProjectCard from '../../Components/ProjectCard/ProjectCard';
 import ProjectForm from '../../Components/ProjectForm/ProjectForm';
 
 
 import './Dashboard.css'
 const Dashboard = ({ user, setPage }) => {
 
-    const [isOpen, setIsOpen] = useState(false)
+    const [isOpenProjectForm, setIsOpenProjectForm] = useState(false)
+    const [reloadBoard, setReloadBoard] = useState("")
 
     useEffect(() => {
         setPage("dashboard");
     }, [])
 
-    const handleClick = () =>{
-        console.log("create a new card");
-    }
-
-
-    const cards = ["afasdfaw4efawfd", "asfasdefawefaewf", "asfasfeawfeasd", "asfasfawefawesfasdafsadf", "asfasdfasdfsadfasdfas5", "asfasdfasdfasfsadfs"]
-
     return (
         <>
-        <ProjectForm user={user} open={isOpen} onClose={()=>setIsOpen(false)}/>
+        <ProjectForm user={user} open={isOpenProjectForm} onClose={()=>(setIsOpenProjectForm(false))}/>
         <div className='dashboard-container mt-5'>
-            <div className="card border-left-info shadow project-card" onClick={()=> setIsOpen(true)}>
+            <div className="card border-left-info shadow project-card" onClick={()=> setIsOpenProjectForm(true)}>
                 <div className="card-body">
                     <div className="row no-gutters align-items-center">
                         <div className="col mr-2">
@@ -40,8 +34,8 @@ const Dashboard = ({ user, setPage }) => {
             </div>
 
             {
-                cards.map(card =>
-                    <Project key={card} />
+                user.projects.map(project =>
+                    <ProjectCard setReloadBoard={setReloadBoard} user={user} key={project._id} project={project} />
                 )
             }
 

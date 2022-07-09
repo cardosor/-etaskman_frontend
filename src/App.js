@@ -35,6 +35,7 @@ function App() {
         <Route path='/pricing' element={<Pricing setPage={setPage} />} />
         <Route path='/dashboard' element={(user && <Dashboard user={user} setPage={setPage} />) || <Home />} />
         <Route path='/profile' element={(user && <Profile setPage={setPage} user={user} />) || <Home />} />
+        <Route path='/*' element={<Home />} />
       </Routes>
       <Footer />
 

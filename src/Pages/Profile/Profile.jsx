@@ -12,7 +12,10 @@ const Profile = ( { user, setPage } ) => {
 
     return (
         <div className='profile-container m-5'>
-            {user.fname} {user.lname} {user.email} {user.type} {user.active.toString()}  {d.toLocaleString('en-US', {timeZone: 'America/New_York', dateStyle: 'full',timeStyle: 'full',})} {user.projects}
+            {user.fname} {user.lname} {user.email} {user.type} {user.active.toString()}  {d.toLocaleString('en-US', {timeZone: 'America/New_York', dateStyle: 'full',timeStyle: 'full',})} 
+            {user.projects.map(project =>
+                    <p>{project.title}</p>
+                )}
         </div>
     );
 }
