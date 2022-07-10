@@ -159,7 +159,7 @@ const ProjectForm = ({ user, open, onClose }) => {
 
                         <div className="row mb-3">
                             <div className="col-6 text-center">
-                                <button className="btn btn-secondary mt-2 fw-bold" onClick={closeModal}>Close</button>
+                                <button className="btn btn-secondary mt-2 fw-bold" type="button" onClick={closeModal}>Close</button>
                             </div>
                             <div className="col-6 text-center">
                                 <button className="btn btn-primary mt-2 fw-bold" type="submit">Create</button>

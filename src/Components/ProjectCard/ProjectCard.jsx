@@ -6,7 +6,6 @@ import ProjectModal from '../ProjectModal/ProjectModal';
 const ProjectCard = ({ user, project, setReloadBoard }) => {
 
     const [isOpenProjectModal, setIsOpenProjectModal] = useState(false)
-    console.log("reload ", project)
 
     return (
         <>

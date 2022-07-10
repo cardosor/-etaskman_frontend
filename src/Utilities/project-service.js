@@ -11,6 +11,19 @@ const options = () => {
     }
 }
 
+const getProject = async project => {
+    try{
+        const response = await axios.get(`${BASE_URL}/${project._id}`, options);
+        //created project
+        console.log(response);
+        return response;
+    }catch(e){
+        
+        console.log("e ", e);
+        return e.response.request.statusText.toLowerCase();
+    }
+}
+
 const createProject = async project => {
     try{
         const response = await axios.post(`${BASE_URL}/`, project, options);
@@ -57,6 +70,7 @@ const deleteProject = async project => {
 
 
 export {
+    getProject,
     createProject,
     updateProject,
     deleteProject

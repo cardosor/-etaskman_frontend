@@ -1,13 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { createPortal } from 'react-dom';
 import { updateProject, deleteProject } from '../../Utilities/project-service';
+import { useNavigate } from 'react-router-dom'
 
 
 const ProjectModal = ({ setReloadBoard, user, currentProject, open, onClose }) => {
 
     const [project, setProject] = useState(currentProject);
 
+    const navigate = useNavigate();
+
     if (!open) return null;
+
+    
 
     const closeModal = (e) => {
         onClose();
@@ -15,19 +20,15 @@ const ProjectModal = ({ setReloadBoard, user, currentProject, open, onClose }) =
 
     const handleChangeWorkFlow = (e) => {
         setProject({ ...project, board: { ...project.board, workflow: { ...project.board.workflow, [e.target.name]: e.target.value } } })
-        //console.log(e.target.value)
-        //project.board.workflow[e.target.name] = e.target.value
     }
 
     const handleDelete = async (e) => {
         e.preventDefault()
-        console.log("delete");
+
         const result = await deleteProject(project);
-        console.log("result delete ", result);
+
         if (result.status === 200) {
-            console.log("result ", result.data);
-            const index = user.projects.findIndex((element)=> element._id === result.data._id)
-            console.log(user.projects);
+            const index = user.projects.findIndex((element)=> element._id === result.data._id);
             user.projects.splice(index, 1);
             setReloadBoard(Date.now());
             onClose()
@@ -37,11 +38,21 @@ const ProjectModal = ({ setReloadBoard, user, currentProject, open, onClose }) =
         console.log(user)
     }
 
+    const handleOpenProject = async (e) => {
+        e.preventDefault();
+        user.projects.forEach(el=>{
+            if(el._id === project._id){
+                el.selected = true;
+            }
+        })
+        onClose();
+        navigate('/board');
+    }
+
     const handleUpdate = async (e) => {
         e.preventDefault()
         const result = await updateProject(project);
         if (result.status === 200) {
-            console.log("result ", result.data);
             const index = user.projects.findIndex((element)=> element._id === result.data._id)
             user.projects[index] = result.data;
             setReloadBoard(Date.now());
@@ -55,9 +66,7 @@ const ProjectModal = ({ setReloadBoard, user, currentProject, open, onClose }) =
     const handleChange = (e) => {
         setProject({ ...project, [e.target.name]: e.target.value })
     }
-
-    console.log("project modal Current", currentProject);
-    console.log("project modal", project);
+    
     return createPortal(
         <>
             <div className='project-form-overlay' onClick={onClose}>
@@ -106,16 +115,16 @@ const ProjectModal = ({ setReloadBoard, user, currentProject, open, onClose }) =
 
                         <div className="row mb-3">
                             <div className="col-3 text-center">
-                                <button className="btn btn-secondary mt-2 fw-bold" onClick={closeModal}>Close</button>
+                                <button className="btn btn-secondary mt-2 fw-bold" type="button" onClick={closeModal}>Close</button>
                             </div>
                             <div className="col-3 text-center">
-                                <button className="btn btn-danger mt-2 fw-bold" onClick={handleDelete}>Delete</button>
+                                <button className="btn btn-danger mt-2 fw-bold" type="button" onClick={handleDelete}>Delete</button>
                             </div>
                             <div className="col-3 text-center">
-                                <button className="btn btn-warning mt-2 fw-bold" onClick={handleUpdate}>Update</button>
+                                <button className="btn btn-warning mt-2 fw-bold" type="button" onClick={handleUpdate}>Update</button>
                             </div>
                             <div className="col-3 text-center">
-                                <button className="btn btn-primary mt-2 fw-bold" type="submit">Open</button>
+                                <button className="btn btn-primary mt-2 fw-bold" type="submit" onClick={handleOpenProject}>Open</button>
                             </div>
                         </div>
 

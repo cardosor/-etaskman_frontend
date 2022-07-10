@@ -12,6 +12,7 @@ const Dashboard = ({ user, setPage }) => {
 
     useEffect(() => {
         setPage("dashboard");
+        user.projects.forEach(el => el.selected = false);
     }, [])
 
     return (

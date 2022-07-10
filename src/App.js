@@ -14,6 +14,7 @@ import LogIn from './Pages/LogIn/LogIn';
 import Pricing from './Pages/Pricing/Pricing';
 import Dashboard from './Pages/Dashboard/Dashboard';
 import Profile from './Pages/Profile/Profile';
+import Board from './Pages/Board/Board';
 
 
 function App() {
@@ -35,6 +36,8 @@ function App() {
         <Route path='/pricing' element={<Pricing setPage={setPage} />} />
         <Route path='/dashboard' element={(user && <Dashboard user={user} setPage={setPage} />) || <Home />} />
         <Route path='/profile' element={(user && <Profile setPage={setPage} user={user} />) || <Home />} />
+        <Route path='/board' element={(user && <Board user={user} />) || <Home />} />
+
         <Route path='/*' element={<Home />} />
       </Routes>
       <Footer />
