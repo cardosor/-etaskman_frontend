@@ -1,5 +1,5 @@
 import axios from "axios";
-const BASE_URL = 'http://192.168.0.37:8080/api/v1/users'
+const BASE_URL = process.env.REACT_APP_URI_USERS;
 
 const login = async credentials => {
     try{
@@ -8,7 +8,6 @@ const login = async credentials => {
         localStorage.setItem('token',response.data);
         return getUser();
     }catch(e){
-        console.log("e ", e);
         if(e.response.data.reason.toLowerCase() === "bad credentials"){
             return("bad credentials")
         }

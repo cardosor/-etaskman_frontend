@@ -36,7 +36,7 @@ const Dashboard = ({ user, setPage }) => {
 
             {
                 user.projects.map(project =>
-                    <ProjectCard setReloadBoard={setReloadBoard} user={user} key={project._id} project={project} />
+                    <ProjectCard setReloadBoard={setReloadBoard} user={user}  project={project} key={project._id}/>
                 )
             }
 

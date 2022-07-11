@@ -8,13 +8,16 @@ const Profile = ( { user, setPage } ) => {
     }, [])
 
     const d = new Date(Date.parse(user.last_login));
-    
 
     return (
-        <div className='profile-container m-5'>
-            {user.fname} {user.lname} {user.email} {user.type} {user.active.toString()}  {d.toLocaleString('en-US', {timeZone: 'America/New_York', dateStyle: 'full',timeStyle: 'full',})} 
+        <div className='profile-container'>
+            <h3>Name: {user.fname} {user.lname}</h3>  
+            <h3>Email: {user.email}</h3> 
+            <h3>Account Type: {user.type.toUpperCase()}</h3>
+            <h3>Last Log In: {d.toLocaleString('en-US', {timeZone: 'America/New_York', dateStyle: 'full',timeStyle: 'full',})}</h3> 
+            <h3>Projects: {user.projects.length}</h3>
             {user.projects.map(project =>
-                    <p>{project.title}</p>
+                    <h3 key={project._id}>{project.title}</h3>
                 )}
         </div>
     );

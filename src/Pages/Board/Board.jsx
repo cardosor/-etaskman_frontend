@@ -4,8 +4,9 @@ import './Board.css';
 import TaskForm from '../../Components/TaskForm/TaskForm';
 import TaskModal from '../../Components/TaskModal/TaskModal';
 import { getProject } from '../../Utilities/project-service';
+import {showMaxWords} from '../../HelperFuncs/HelperFuncs';
 
-const Board = ({ user }) => {
+const Board = ({ setPage, user }) => {
 
     const [project, setProject] = useState(null);
     const [isOpenTaskForm, setIsOpeTaskForm] = useState(false)
@@ -14,11 +15,11 @@ const Board = ({ user }) => {
     const navigate = useNavigate();
 
     useEffect(() => {
+        setPage("board");
         let projectIndex = null;
         user.projects.map((project, index) => {
             if (project.selected === true) {
                 projectIndex = index;
-
             }
         })
 
@@ -26,12 +27,11 @@ const Board = ({ user }) => {
         if (projectIndex === null) return;
         (async () => {
             const result = await getProject(user.projects[projectIndex]);
-            console.log("result ", result);
             setProject(result.data);
         })();
     }, [])
 
-    if (project === null) return;
+    if (project === null || project === undefined) return;
 
     const handleOpenModal = (task) => {
         setIsOpeTaskModal({open:true, task: task});
@@ -45,7 +45,7 @@ const Board = ({ user }) => {
                 {
                     Object.values(project.board.workflow).map((value, index) =>
 
-                        <div className='board-column' style={{ width: `${(100 / Object.values(project.board.workflow).length) - 1}%` }} key={project._id+index}>
+                        <div className='board-column' style={{"min-width": "300px", width: `${(100 / Object.values(project.board.workflow).length) - 1}%` }} key={project._id+index}>
                             <div className='board-column-title'>
                                 {value}
                             </div>
@@ -77,10 +77,10 @@ const Board = ({ user }) => {
                                                 <div className="row no-gutters align-items-center">
                                                     <div className="col mr-2">
                                                         <div className="text-xs font-weight-bold  mb-1">
-                                                            <p>{task.title}</p>
+                                                            <p>{showMaxWords(task.title,20)}</p>
                                                         </div>
                                                         <div className="font-weight-bold">
-                                                            {task.description}
+                                                            {showMaxWords(task.description,50)}
                                                         </div>
                                                     </div>
                                                 </div>

@@ -1,15 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
-import { useState } from 'react';
 
 const Navbar = ({ user, setUser, logout, page, setPage }) => {
-    console.log("nav bar ", user)
-    console.log("page ", page)
+
+    
     return (
         <>
             <nav className="navbar navbar-expand-lg fw-bold bg-dark fixed-top">
                 <div className="container">
-                    <Link className="navbar-brand text-light" to="/" onClick={()=> setPage("home")}>ETaskMan</Link>
+                    <Link className="navbar-brand text-light fs-3" to="/" onClick={()=> setPage("home")}>ETaskMan</Link>
                     <button className="navbar-toggler bg-light"
                         type="button"
                         data-bs-toggle="collapse"
@@ -19,7 +18,7 @@ const Navbar = ({ user, setUser, logout, page, setPage }) => {
                         aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"></span>
                     </button>
-                    <div className="collapse navbar-collapse fw-bold fs-5" id="navbarToggler">
+                    <div className="collapse navbar-collapse fw-bold fs-3" id="navbarToggler">
                         <ul className="navbar-nav ms-auto">
 
                             {

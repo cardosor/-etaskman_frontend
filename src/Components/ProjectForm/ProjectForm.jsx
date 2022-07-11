@@ -10,6 +10,7 @@ const ProjectForm = ({ user, open, onClose }) => {
         title: '',
         description: '',
         owners: [{ "_id": user._id, fname: user.fname, lname: user.lname, role: 7 }],
+        active:true,
         board: {
             cardcolor: "", workflow: {
                 0: "Back Log",
@@ -17,7 +18,6 @@ const ProjectForm = ({ user, open, onClose }) => {
                 2: "In Progress",
                 3: "Verify",
                 4: "Done",
-                5: "final",
             }
         }
     });
@@ -32,6 +32,7 @@ const ProjectForm = ({ user, open, onClose }) => {
             title: '',
             description: '',
             owners: [{ "_id": user._id, fname: user.fname, lname: user.lname, role: 7 }],
+            active:true,
             board: {
                 cardcolor: "", workflow: {
                     0: "Back Log",
@@ -52,31 +53,22 @@ const ProjectForm = ({ user, open, onClose }) => {
 
     const handleChangeWorkFlow = (e) => {
         setProject({ ...project, board: { ...project.board, workflow: { ...project.board.workflow, [e.target.name]: e.target.value } } })
-        //console.log(e.target.value)
-        //project.board.workflow[e.target.name] = e.target.value
     }
 
     const handleRemoveStep = (e) => {
         const numSteps = Object.keys(project.board.workflow).length;
-        console.log(numSteps);
         if(numSteps < 3) return;
         delete project.board.workflow[numSteps-1];
         setProject({ ...project, board: { ...project.board, workflow: {...project.board.workflow} } })
-        console.log("remove step")
     }
 
     const handleAddStep = (e) => {
-        console.log("Add step")
         const numSteps = Object.keys(project.board.workflow).length;
         project.board.workflow[numSteps] = "";
         setProject({ ...project, board: { ...project.board, workflow: {...project.board.workflow} } })
     }
 
-
-
     const handleChangeColor = (e) => {
-        console.log(e.target.value);
-        console.log("project ", project);
         setProject({ ...project, board: { cardcolor: e.target.value, workflow: project.board.workflow } });
     }
 
@@ -89,15 +81,12 @@ const ProjectForm = ({ user, open, onClose }) => {
         } else {
             console.log("Try again later");
         }
-        console.log(user)
     }
 
     const handleChange = (e) => {
         setProject({ ...project, [e.target.name]: e.target.value })
     }
 
-    console.log(colors);
-    console.log("project ", project);
     return createPortal(
         <>
             <div className='project-form-overlay' onClick={onClose}>

@@ -30,12 +30,12 @@ const ProjectModal = ({ setReloadBoard, user, currentProject, open, onClose }) =
         if (result.status === 200) {
             const index = user.projects.findIndex((element)=> element._id === result.data._id);
             user.projects.splice(index, 1);
+            setProject({});
             setReloadBoard(Date.now());
             onClose()
         } else {
             console.log("Try again later");
         }
-        console.log(user)
     }
 
     const handleOpenProject = async (e) => {
@@ -54,13 +54,13 @@ const ProjectModal = ({ setReloadBoard, user, currentProject, open, onClose }) =
         const result = await updateProject(project);
         if (result.status === 200) {
             const index = user.projects.findIndex((element)=> element._id === result.data._id)
+            console.log(result.data);
             user.projects[index] = result.data;
+            setProject(result.data);
             setReloadBoard(Date.now());
-            onClose()
         } else {
             console.log("Try again later");
         }
-        console.log(user)
     }
 
     const handleChange = (e) => {
