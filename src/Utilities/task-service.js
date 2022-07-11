@@ -6,7 +6,6 @@ const createTask = async task => {
     try{
         const response = await axios.post(`${BASE_URL}/`, task, getHeaders());
         //created task
-        console.log(response);
         return response;
     }catch(e){
         return e.response.request.statusText.toLowerCase();
@@ -17,9 +16,7 @@ const createTask = async task => {
 const updateTask= async task => {
     try{
         const response = await axios.put(`${BASE_URL}/${task._id}`, task, getHeaders());
-        //created task
-        console.log(response);
-        return response;
+        return response.data;
     }catch(e){
         return e.response.request.statusText.toLowerCase();
     }
@@ -28,8 +25,7 @@ const updateTask= async task => {
 const deleteTask = async task => {
     try{
         const response = await axios.delete(`${BASE_URL}/${task._id}`, getHeaders());
-        //created task
-        console.log(response);
+        //deleted task
         return response;
     }catch(e){
         return e.response.request.statusText.toLowerCase();

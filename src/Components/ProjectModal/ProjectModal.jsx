@@ -54,7 +54,6 @@ const ProjectModal = ({ setReloadBoard, user, currentProject, open, onClose }) =
         const result = await updateProject(project);
         if (result.status === 200) {
             const index = user.projects.findIndex((element)=> element._id === result.data._id)
-            console.log(result.data);
             user.projects[index] = result.data;
             setProject(result.data);
             setReloadBoard(Date.now());

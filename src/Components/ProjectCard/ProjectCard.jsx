@@ -8,8 +8,6 @@ const ProjectCard = ({ setReloadBoard, user, project}) => {
 
     const [isOpenProjectModal, setIsOpenProjectModal] = useState(false)
 
-    console.log("ProjectCard ", project);
-    console.log("User ", user);
     return (
         <>
             <ProjectModal setReloadBoard={setReloadBoard} user={user} currentProject={project} open={isOpenProjectModal} onClose={()=>(setIsOpenProjectModal(false))}/>

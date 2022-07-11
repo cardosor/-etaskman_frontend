@@ -23,7 +23,7 @@
     gap:1%;
     justify-content:flex-start;
     align-content:flex-start;
-
+    /* box-shadow: 2px 2px 5px gray; */
 }
 
 .board-column-title{
@@ -31,13 +31,14 @@
     text-align: center;
     background-color: #F9FEFE;
     width: 100%;
+    min-height: 5%;
     font-weight: bold;
     font-size: 1.5rem;
 }
 .board-column-container{
     background-color: #FEFAF9;
     width: 100%;
-    height: 100%;
+    min-height: 93%;
     display: flex;
     flex-direction: row;
     flex-wrap:  wrap;
@@ -52,10 +53,16 @@
     height: auto;
     margin: 1%;
 }
-
+.task-card.dragging{
+    opacity: .4;
+}
 
 .task-card:hover {
     cursor: pointer;
     transform: scale(1.02);
     z-index: 2;
+}
+
+.draggable{
+    background-color: azure;
 }

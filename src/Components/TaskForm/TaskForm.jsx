@@ -49,6 +49,7 @@ const TaskForm = ({project, setProject, user, isOpenTaskForm, onClose }) => {
         e.preventDefault()
         task.project = project._id;
         const result = await createTask(task);
+        console.log(result)
         if (result.status === 200) {
             const index = user.projects.findIndex((element)=> element._id === project._id);
             user.projects[index].tasks.push(result.data);
@@ -57,7 +58,6 @@ const TaskForm = ({project, setProject, user, isOpenTaskForm, onClose }) => {
         } else {
             console.log("Try again later");
         }
-        console.log(user)
     }
 
     const handleChange = (e) => {

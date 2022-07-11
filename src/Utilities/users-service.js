@@ -46,7 +46,7 @@ const signUp = async user => {
         localStorage.setItem('token',token.data);
         return getUser();
     }catch(e){
-        console.log(e);
+        return e.response.request.statusText.toLowerCase();
     }
 }
 

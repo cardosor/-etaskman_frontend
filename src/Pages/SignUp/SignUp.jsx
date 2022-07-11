@@ -23,7 +23,6 @@ const SignUp = ({ setUser, setPage }) => {
     });
 
     const handleChange = e => {
-        console.log(newUser)
         if(message) setMessage("");
         
         setNewUser({

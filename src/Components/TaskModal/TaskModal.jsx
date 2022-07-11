@@ -8,9 +8,7 @@ const TaskModal = ({project, setProject, user, isOpenTaskModal, onClose }) => {
 
     const [task, setTask] = useState(isOpenTaskModal.task);
 
-    useEffect(() => {
-        console.log("isOpenTaskModal ", isOpenTaskModal.task);  
-        console.log("task ", task);      
+    useEffect(() => {    
         if(JSON.stringify(task) === "{}") setTask(isOpenTaskModal.task);
     })
 
@@ -67,7 +65,6 @@ const TaskModal = ({project, setProject, user, isOpenTaskModal, onClose }) => {
         } else {
             console.log("Try again later");
         }
-        console.log(user)
     }
 
     const handleUpdate = async (e) => {
@@ -81,13 +78,12 @@ const TaskModal = ({project, setProject, user, isOpenTaskModal, onClose }) => {
         } else {
             console.log("Try again later");
         }
-        console.log(user)
     }
 
     const handleChange = (e) => {
         setTask({ ...task, [e.target.name]: e.target.value })
     }
-    console.log(task.status)
+
     return createPortal(
         <>
             <div className='task-form-overlay' onClick={closeModal}>
