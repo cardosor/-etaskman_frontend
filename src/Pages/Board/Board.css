@@ -15,6 +15,7 @@
 .board-column{
     background-color: gray;
     min-height: 30vh;
+    min-width: 180px;
     display: flex;
     flex-direction: row;
     flex-wrap:  wrap;
@@ -38,7 +39,7 @@
 .board-column-container{
     background-color: #FEFAF9;
     width: 100%;
-    min-height: 93%;
+    min-height: 94%;
     display: flex;
     flex-direction: row;
     flex-wrap:  wrap;
@@ -64,5 +65,5 @@
 }
 
 .draggable{
-    background-color: azure;
+    background-color: white;
 }

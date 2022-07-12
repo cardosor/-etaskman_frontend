@@ -1,9 +1,19 @@
-@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@100;200&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;300;400&display=swap');
 *{
   margin: 0;
   padding: 0;
   font-family: 'Raleway', sans-serif;
 }
+
+.etm-logo{
+  background-image: url(../public/images/logos_black.png);
+  background-repeat: no-repeat;
+  background-size:contain;
+  background-position: center;
+  width: 500px;
+  height: 100px;
+}
+
 .banner{
   width: 100%;
   height: 100vh;
@@ -14,6 +24,9 @@
 
 .banner-heading{
   margin-top: 200px;
+  display: flex;
+  align-content: center;
+  justify-content: center;
 }
 
 .banner-btn{

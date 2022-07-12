@@ -29,9 +29,13 @@ const ProjectModal = ({ setReloadBoard, user, currentProject, open, onClose }) =
 
         if (result.status === 200) {
             const index = user.projects.findIndex((element)=> element._id === result.data._id);
+            //remove the project from the user object
             user.projects.splice(index, 1);
+            //set the local project to an empty object
             setProject({});
+            //reload the dashboard
             setReloadBoard(Date.now());
+            //close project modal
             onClose()
         } else {
             console.log("Try again later");
@@ -40,12 +44,17 @@ const ProjectModal = ({ setReloadBoard, user, currentProject, open, onClose }) =
 
     const handleOpenProject = async (e) => {
         e.preventDefault();
+        //set the project selected as the active
+        //When the board page is loaded, it will be
+        //the project to the loaded
         user.projects.forEach(el=>{
             if(el._id === project._id){
                 el.selected = true;
             }
         })
+        //close project modal
         onClose();
+        //go to the board page
         navigate('/board');
     }
 
@@ -54,8 +63,11 @@ const ProjectModal = ({ setReloadBoard, user, currentProject, open, onClose }) =
         const result = await updateProject(project);
         if (result.status === 200) {
             const index = user.projects.findIndex((element)=> element._id === result.data._id)
+            //Set project in user object as result
             user.projects[index] = result.data;
+            //Set local project to result
             setProject(result.data);
+            //change state to reload the dashboard
             setReloadBoard(Date.now());
         } else {
             console.log("Try again later");

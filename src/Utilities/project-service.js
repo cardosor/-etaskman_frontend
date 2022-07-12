@@ -2,6 +2,16 @@ import axios from "axios";
 import { getHeaders } from '../HelperFuncs/HelperFuncs'
 const BASE_URL = process.env.REACT_APP_URI_PROJECTS;
 
+const getAllProjects = async userID => {
+    try{
+        const response = await axios.get(`${BASE_URL}/user/${userID}`, getHeaders());
+        //get projects
+        return response;
+    }catch(e){
+        return e.response.request.statusText.toLowerCase();
+    }
+}
+
 const getProject = async project => {
     try{
         const response = await axios.get(`${BASE_URL}/${project._id}`, getHeaders());
@@ -26,7 +36,7 @@ const createProject = async project => {
 const updateProject = async project => {
     try{
         const response = await axios.put(`${BASE_URL}/${project._id}`, project, getHeaders());
-        return response.data;
+        return response;
     }catch(e){
         return e.response.request.statusText.toLowerCase();
     }
@@ -47,5 +57,6 @@ export {
     getProject,
     createProject,
     updateProject,
-    deleteProject
+    deleteProject,
+    getAllProjects
 }

@@ -2,17 +2,24 @@ import React from 'react';
 import { useEffect, useState } from 'react';
 import ProjectCard from '../../Components/ProjectCard/ProjectCard';
 import ProjectForm from '../../Components/ProjectForm/ProjectForm';
+import { fetchUser } from '../../Utilities/users-service';
 
 
 import './Dashboard.css'
-const Dashboard = ({ user, setPage }) => {
+const Dashboard = ({ setUser, user, setPage }) => {
 
     const [isOpenProjectForm, setIsOpenProjectForm] = useState(false)
     const [reloadBoard, setReloadBoard] = useState("")
+    const [toggle, setToggle] = useState(false);
 
     useEffect(() => {
         setPage("dashboard");
-        user.projects.forEach(el => el.selected = false);
+       (async()=>{
+        const gotUser = await fetchUser(user._id);
+        gotUser.projects.forEach(el => el.selected = false);
+        setUser(gotUser);
+        setToggle(!toggle);
+       })()
     }, [])
 
     return (
@@ -35,6 +42,7 @@ const Dashboard = ({ user, setPage }) => {
             </div>
 
             {
+                toggle &&
                 user.projects.map(project =>
                     <ProjectCard setReloadBoard={setReloadBoard} user={user}  project={project} key={project._id}/>
                 )

@@ -6,7 +6,12 @@ const Home = () => {
         <>
             <div className='banner'>
                 <p>&nbsp;</p>
-                <h1 className='fw-bold display-2 text-center banner-heading'>Easy Task Manager</h1>
+                
+                {/* <h1 className='fw-bold display-2 text-center banner-heading'>Easy Task Manager</h1> */}
+                
+                <div className='banner-heading'>
+                    <div className='etm-logo'/>
+                </div>
                 <p className='text-light fw-bold text-center container fs-3'>A Simple tool to manage tasks for any project.
                     Based in Kanban methodology which is a popular Lean workflow management method for defining, managing, and improving services.
                 </p>
@@ -15,7 +20,7 @@ const Home = () => {
                     <Link className='btn btn-primary banner-btn fw-bold' to="/signup">Get Started</Link>
                 </div>
             </div>
-            <section className='features mt-5'>
+            <section className='features mt-5 mb-5'>
                 <div className="container">
                     <div className='row'>
                         <div className='col-lg-6 col-md-6 col-sm-12 features-img rounded mx-auto'></div>

@@ -4,7 +4,7 @@ import { updateTask, deleteTask } from '../../Utilities/task-service';
 
 import './TaskModal.css';
 
-const TaskModal = ({project, setProject, user, isOpenTaskModal, onClose }) => {
+const TaskModal = ({project, setProject, isOpenTaskModal, onClose }) => {
 
     const [task, setTask] = useState(isOpenTaskModal.task);
 
@@ -34,7 +34,7 @@ const TaskModal = ({project, setProject, user, isOpenTaskModal, onClose }) => {
             const index = project.tasks.findIndex((element)=> element._id === result.data._id);
             project.tasks[index] = result.data;
             setProject({...project});
-            onClose()
+            closeModal();
         } else {
             console.log("Try again later");
         }
@@ -48,7 +48,7 @@ const TaskModal = ({project, setProject, user, isOpenTaskModal, onClose }) => {
             const index = project.tasks.findIndex((element)=> element._id === result.data._id);
             project.tasks[index] = result.data;
             setProject({...project});
-            onClose()
+            closeModal();
         } else {
             console.log("Try again later");
         }
@@ -61,7 +61,7 @@ const TaskModal = ({project, setProject, user, isOpenTaskModal, onClose }) => {
             const index = project.tasks.findIndex((element)=> element._id === result.data._id);
             project.tasks.splice(index, 1);
             setProject({...project});
-            onClose()
+            closeModal();
         } else {
             console.log("Try again later");
         }
@@ -74,7 +74,7 @@ const TaskModal = ({project, setProject, user, isOpenTaskModal, onClose }) => {
             const index = project.tasks.findIndex((element)=> element._id === result.data._id);
             project.tasks[index] = result.data;
             setProject({...project});
-            onClose()
+            // closeModal();
         } else {
             console.log("Try again later");
         }

@@ -16,7 +16,8 @@ const createTask = async task => {
 const updateTask= async task => {
     try{
         const response = await axios.put(`${BASE_URL}/${task._id}`, task, getHeaders());
-        return response.data;
+        //updated task
+        return response;
     }catch(e){
         return e.response.request.statusText.toLowerCase();
     }

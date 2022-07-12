@@ -31,12 +31,12 @@ const Board = ({ setPage, user }) => {
         if (projectIndex === null) return;
         (async () => {
             const result = await getProject(user.projects[projectIndex]);
-            setProject({...result.data});
+            setProject({ ...result.data });
 
         })();
     }, [])
 
-    
+
 
     if (project === null || project === undefined) return;
 
@@ -65,6 +65,7 @@ const Board = ({ setPage, user }) => {
 
     const handleDragOver = async (e) => {
         e.preventDefault();
+        console.log(e.target.id);
         if (draggingCard.current === null) draggingCard.current = document.querySelector('.dragging');
         if (e.target.id === `column${draggedTask.current.status}`) return;
         if (e.target.id === `column${draggedTask.current.status + 1}`) {
@@ -72,18 +73,18 @@ const Board = ({ setPage, user }) => {
             draggedTask.current.status += 1;
             const indexDragged = project.tasks.findIndex((t) => t._id === draggedTask.current._id);
             project.tasks[indexDragged].status += 1;
-            setProject({ ...project});
+            setProject({ ...project });
         }
         if (draggedTask.current.status - 1 >= 0 && e.target.id === `column${draggedTask.current.status - 1}`) {
             if (draggingCard.current === null) return;
             const indexDragged = project.tasks.findIndex((t) => t._id === draggedTask.current._id);
             project.tasks[indexDragged].status -= 1;
-            setProject({ ...project});
+            setProject({ ...project });
         }
 
     }
 
-    const   handleDragEnter = (e, task) => {
+    const handleDragEnter = (e, task) => {
         if (task._id === draggedTask.current._id) return;
         draggedToTask.current = task;
         const indexTarget = project.tasks.findIndex((t) => t._id === draggedToTask.current._id);
@@ -96,7 +97,7 @@ const Board = ({ setPage, user }) => {
         project.tasks.splice(indexTarget, 0, taskDragged);
 
         draggedTask.current.status = draggedToTask.current.status;
-
+        
         setProject({ ...project });
     }
 
@@ -108,7 +109,7 @@ const Board = ({ setPage, user }) => {
                 {
                     Object.values(project.board.workflow).map((value, index) =>
 
-                        <div className='board-column' style={{ "minwidth": "300px", width: `${(100 / Object.values(project.board.workflow).length) - 1}%` }} key={project._id + index}>
+                        <div className='board-column' style={{ width: `${(100 / Object.values(project.board.workflow).length) - 1}%` }} key={project._id + index}>
                             <div className='board-column-title'>
                                 {value}
                             </div>
@@ -118,6 +119,7 @@ const Board = ({ setPage, user }) => {
                                     index === 0 &&
                                     <div className="card border-left-info shadow task-card" onClick={() => setIsOpeTaskForm(true)}>
                                         <div className="card-body">
+
                                             <div className="row no-gutters align-items-center">
                                                 <div className="col mr-2">
                                                     <div className="text-xs font-weight-bold  mb-1">
@@ -136,19 +138,22 @@ const Board = ({ setPage, user }) => {
                                     project.tasks.map(task =>
                                         task.status === index && task.active === true &&
                                         <div key={task._id} id={task._id} onDragEnter={(e) => handleDragEnter(e, task)} className={`card border-left-${task.properties.cardcolor} shadow task-card draggable`} draggable={true} onDragStart={(e) => handleDragStart(e, task)} onClick={() => handleOpenModal(task)}>
+                                            <h5 className="card-header">{showMaxWords(task.title, 20)}</h5>
                                             <div className="card-body">
-                                                <div className="row no-gutters align-items-center">
-                                                    <div className="col mr-2">
-                                                        <div className="text-xs font-weight-bold  mb-1">
-                                                            <p>{showMaxWords(task.title, 20)}</p>
-                                                        </div>
-                                                        <div className="font-weight-bold">
-                                                            {showMaxWords(task.description, 50)}
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                                <p className="card-text">{showMaxWords(task.description, 50)}</p>
+                                                
                                             </div>
                                         </div>
+                                        // <div key={task._id} id={task._id} onDragEnter={(e) => handleDragEnter(e, task)} className={`card border-left-${task.properties.cardcolor} shadow task-card draggable`} draggable={true} onDragStart={(e) => handleDragStart(e, task)} onClick={() => handleOpenModal(task)}>
+                                        //     <div className="card-body">
+                                        //         <div className="card-header text-xs font-weight-bold  mb-1">
+                                        //             <p>{showMaxWords(task.title, 20)}</p>
+                                        //         </div>
+                                        //         <div className="font-weight-bold">
+                                        //             {showMaxWords(task.description, 50)}
+                                        //         </div>
+                                        //     </div>
+                                        // </div>
                                     )
                                 }
 
