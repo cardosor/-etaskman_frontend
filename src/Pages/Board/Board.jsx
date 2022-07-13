@@ -64,7 +64,6 @@ const Board = ({ setPage, user }) => {
 
     const handleDragOver = async (e) => {
         e.preventDefault();
-        console.log(e.target.id);
         if (draggingCard.current === null) draggingCard.current = document.querySelector('.dragging');
         if (e.target.id === `column${draggedTask.current.status}`) return;
         if (e.target.id === `column${draggedTask.current.status + 1}`) {
@@ -99,8 +98,6 @@ const Board = ({ setPage, user }) => {
 
         setProject({ ...project });
     }
-
-    console.log("project", project);
 
     return (
         <>

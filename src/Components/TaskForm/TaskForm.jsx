@@ -52,7 +52,6 @@ const TaskForm = ({project, setProject, user, isOpenTaskForm, onClose }) => {
         if (result.status === 200) {
             const index = user.projects.findIndex((element)=> element._id === project._id);
             user.projects[index].tasks.push(result.data._id);
-            console.log(user.projects[index]);
             setProject({...project, ["tasks"]:[...project.tasks, result.data]});
             onClose()
         } else {

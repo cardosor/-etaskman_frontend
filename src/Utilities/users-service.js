@@ -29,7 +29,6 @@ const fetchUser = async (id) => {
         //Persit the token using window localStorage
         //localStorage.setItem('token',response.data);
         //return the user
-        console.log(response.data);
         return response.data;
     }catch(e){
         //If the user provides a bad user name or password
