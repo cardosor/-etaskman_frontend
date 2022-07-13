@@ -21,24 +21,23 @@ const Board = ({ setPage, user }) => {
     useEffect(() => {
         setPage("board");
         let projectIndex = null;
+
         user.projects.map((project, index) => {
             if (project.selected === true) {
                 projectIndex = index;
             }
-        })
+            return null;
+        });
 
         if (projectIndex === null) navigate('/home');
         if (projectIndex === null) return;
         (async () => {
             const result = await getProject(user.projects[projectIndex]);
             setProject({ ...result.data });
-
         })();
     }, [])
 
 
-
-    if (project === null || project === undefined) return;
 
     const handleOpenModal = (task) => {
         setIsOpeTaskModal({ open: true, task: task });
@@ -101,6 +100,8 @@ const Board = ({ setPage, user }) => {
         setProject({ ...project });
     }
 
+    console.log("project", project);
+
     return (
         <>
             <TaskForm setProject={setProject} project={project} isOpenTaskForm={isOpenTaskForm} user={user} onClose={() => setIsOpeTaskForm(false)} />
@@ -115,6 +116,7 @@ const Board = ({ setPage, user }) => {
             }
             <div className='project-board'>
                 {
+                    project &&
                     Object.values(project.board.workflow).map((value, index) =>
 
                         <div className='board-column' style={{ width: `${(100 / Object.values(project.board.workflow).length) - 1}%` }} key={project._id + index}>
@@ -143,6 +145,7 @@ const Board = ({ setPage, user }) => {
 
                                 }
                                 {
+                                    project &&
                                     project.tasks.map(task =>
                                         task.status === index && task.active === true &&
                                         <div key={task._id} id={task._id} onDragEnter={(e) => handleDragEnter(e, task)} className={`card border-left-${task.properties.cardcolor} shadow task-card draggable`} draggable={true} onDragStart={(e) => handleDragStart(e, task)} onClick={() => handleOpenModal(task)}>
