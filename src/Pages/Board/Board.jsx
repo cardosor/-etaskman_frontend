@@ -97,7 +97,7 @@ const Board = ({ setPage, user }) => {
         project.tasks.splice(indexTarget, 0, taskDragged);
 
         draggedTask.current.status = draggedToTask.current.status;
-        
+
         setProject({ ...project });
     }
 
@@ -105,6 +105,14 @@ const Board = ({ setPage, user }) => {
         <>
             <TaskForm setProject={setProject} project={project} isOpenTaskForm={isOpenTaskForm} user={user} onClose={() => setIsOpeTaskForm(false)} />
             <TaskModal setProject={setProject} project={project} isOpenTaskModal={isOpenTaskModal} user={user} onClose={() => setIsOpeTaskModal({ open: false, task: {} })} />
+            {
+                !project &&
+                <div className='loading d-flex justify-content-center align-items-center'>
+                <div className="spinner-border mt-5" role="status">
+                    <span className="visually-hidden">Loading...</span>
+                </div>
+                </div>
+            }
             <div className='project-board'>
                 {
                     Object.values(project.board.workflow).map((value, index) =>
@@ -141,7 +149,7 @@ const Board = ({ setPage, user }) => {
                                             <h5 className="card-header">{showMaxWords(task.title, 20)}</h5>
                                             <div className="card-body">
                                                 <p className="card-text">{showMaxWords(task.description, 50)}</p>
-                                                
+
                                             </div>
                                         </div>
                                         // <div key={task._id} id={task._id} onDragEnter={(e) => handleDragEnter(e, task)} className={`card border-left-${task.properties.cardcolor} shadow task-card draggable`} draggable={true} onDragStart={(e) => handleDragStart(e, task)} onClick={() => handleOpenModal(task)}>
