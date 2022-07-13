@@ -25,7 +25,7 @@ const Navbar = ({ user, setUser, logout, page, setPage }) => {
                                 user ?
                                     <>
                                         <li className="nav-item">
-                                            <Link className={`nav-link fw-bolder fs-5 ${page === "profile" ? 'text-warning' : 'text-light' } btn btn-primary user-account-btn`}  aria-current="page" to="/profile"><i className={`bi bi-person-circle ${page === "profile" ? 'text-warning' : 'text-light' }`}> </i>{user.type.toUpperCase()}</Link>
+                                            <Link className={`nav-link fw-bolder fs-5 ${page === "profile" ? 'text-warning' : 'text-light' } btn btn-primary user-account-btn`}  aria-current="page" to="/profile"><i className={`bi bi-person-circle ${page === "profile" ? 'text-warning' : 'text-light' }`}> </i>{user.fname.trim()[0]}{user.lname.trim()[0]}</Link>
                                             
                                         </li>
 

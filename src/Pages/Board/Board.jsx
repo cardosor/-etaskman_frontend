@@ -146,9 +146,9 @@ const Board = ({ setPage, user }) => {
                                     project.tasks.map(task =>
                                         task.status === index && task.active === true &&
                                         <div key={task._id} id={task._id} onDragEnter={(e) => handleDragEnter(e, task)} className={`card border-left-${task.properties.cardcolor} shadow task-card draggable`} draggable={true} onDragStart={(e) => handleDragStart(e, task)} onClick={() => handleOpenModal(task)}>
-                                            <h5 className="card-header">{showMaxWords(task.title, 20)}</h5>
+                                            <h5 className="card-header text-center">{showMaxWords(task.title, 20)}</h5>
                                             <div className="card-body">
-                                                <p className="card-text">{showMaxWords(task.description, 50)}</p>
+                                                <p className="card-text text-center">{showMaxWords(task.description, 50)}</p>
 
                                             </div>
                                         </div>
