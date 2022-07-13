@@ -34,7 +34,7 @@ const Profile = ({ user, setPage }) => {
             <h3>Last Log In: {d.toLocaleString('en-US', { timeZone: 'America/New_York', dateStyle: 'full', timeStyle: 'full', })}</h3>
             <h3>Active Projects: {projectList &&
                 projectList.filter((project) => project.active === true).length}</h3>
-            <table class="table table-striped">
+            <table className="table table-striped">
                 <thead>
                     <tr>
                         <th scope="col">Title</th>
@@ -62,7 +62,7 @@ const Profile = ({ user, setPage }) => {
                             {
                                 projectList &&
                                 projectList.filter((project) => project.active === false).length}</h3>
-                        <table class="table table-striped">
+                        <table className="table table-striped">
                             <thead>
                                 <tr>
                                     <th scope="col">title</th>
@@ -80,7 +80,7 @@ const Profile = ({ user, setPage }) => {
                                             <td >{project.title}</td>
                                             <td >No</td>
                                             <td >{new Date(Date.parse(project.start_date)).toLocaleString('en-US', { timeZone: 'America/New_York', dateStyle: 'short', timeStyle: 'short', })}</td>
-                                            <td ><button type="button" class="btn btn-primary" onClick={(e) => restoreProject(e, project)}>Restore</button></td>
+                                            <td ><button type="button" className="btn btn-primary" onClick={(e) => restoreProject(e, project)}>Restore</button></td>
                                         </tr>
                                     )}
                             </tbody>

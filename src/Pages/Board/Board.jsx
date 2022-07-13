@@ -6,22 +6,29 @@ import TaskModal from '../../Components/TaskModal/TaskModal';
 import { getProject } from '../../Utilities/project-service';
 import { updateTask } from '../../Utilities/task-service';
 import { updateProject } from '../../Utilities/project-service';
+//Takes 2 parameters a string and a number, returns a string with a number of characters up to the last word.
 import { showMaxWords } from '../../HelperFuncs/HelperFuncs';
 
 const Board = ({ setPage, user }) => {
 
+    //The task that is being dragged, obj data
     const draggedTask = useRef(null);
+    //the task that is assigned on drag enter, obj data
     const draggedToTask = useRef(null);
+    //the card that is being dragged, element
     const draggingCard = useRef(null);
+    //current project
     const [project, setProject] = useState(null);
+    //Form modal
     const [isOpenTaskForm, setIsOpeTaskForm] = useState(false)
+    //Task modal and task obj data
     const [isOpenTaskModal, setIsOpeTaskModal] = useState({ open: false, task: {} })
     const navigate = useNavigate();
 
     useEffect(() => {
         setPage("board");
         let projectIndex = null;
-
+        //Finds the task that was selected in the dash board
         user.projects.map((project, index) => {
             if (project.selected === true) {
                 projectIndex = index;
@@ -29,8 +36,10 @@ const Board = ({ setPage, user }) => {
             return null;
         });
 
+        //if no project was selected navagate home and return
         if (projectIndex === null) navigate('/home');
         if (projectIndex === null) return;
+        //if a project was selected get project data from backned
         (async () => {
             const result = await getProject(user.projects[projectIndex]);
             setProject({ ...result.data });
@@ -38,11 +47,14 @@ const Board = ({ setPage, user }) => {
     }, [])
 
 
-
+    //Open modal and set the task prop
     const handleOpenModal = (task) => {
         setIsOpeTaskModal({ open: true, task: task });
     }
 
+    //Once the drag ends, set the task and card reff to null
+    //remove the dragging class so oppacity is removed
+    //update the project and task in the backend and removed dragend event
     const handleDragEnd = async (e) => {
         draggedToTask.current = null;
         draggingCard.current = null;
@@ -55,6 +67,8 @@ const Board = ({ setPage, user }) => {
         await updateTask(draggedTask.current);
     }
 
+    //When the task card is dragged add the dragging class and event listener for dragend
+    //set the value of draggedTask
     const handleDragStart = (e, task) => {
         const card = e.target;
         draggedTask.current = task;
@@ -62,10 +76,16 @@ const Board = ({ setPage, user }) => {
         card.addEventListener('dragend', handleDragEnd);
     }
 
+    //Drag the card over a column
     const handleDragOver = async (e) => {
         e.preventDefault();
+        //If the draggingCard is null, set it to the card being dragged
         if (draggingCard.current === null) draggingCard.current = document.querySelector('.dragging');
+
+        //If the dragged card is over the original column return
         if (e.target.id === `column${draggedTask.current.status}`) return;
+
+        //if the dragged card is over the next column change the status of task and setState of project
         if (e.target.id === `column${draggedTask.current.status + 1}`) {
             if (draggingCard.current === null) return;
             draggedTask.current.status += 1;
@@ -73,29 +93,38 @@ const Board = ({ setPage, user }) => {
             project.tasks[indexDragged].status += 1;
             setProject({ ...project });
         }
+        //if the dragged card is over the previus column change the status of task and setState of project
         if (draggedTask.current.status - 1 >= 0 && e.target.id === `column${draggedTask.current.status - 1}`) {
             if (draggingCard.current === null) return;
             const indexDragged = project.tasks.findIndex((t) => t._id === draggedTask.current._id);
             project.tasks[indexDragged].status -= 1;
             setProject({ ...project });
         }
-
     }
 
+    //If card is dragged over another card
     const handleDragEnter = (e, task) => {
+        //if the event is related to the target return
         if (task._id === draggedTask.current._id) return;
+        //Assign the task obj data of the target to draggedToTask
         draggedToTask.current = task;
+
+        //Find the index of the target
         const indexTarget = project.tasks.findIndex((t) => t._id === draggedToTask.current._id);
-
+        //if not found return
+        if (indexTarget === -1) return;
+        //find the index of the dragged card
         const indexDragged = project.tasks.findIndex((t) => t._id === draggedTask.current._id);
+        //if not found return
         if (indexDragged === -1) return;
-
+        
+        //remove the dragged task from the task array
         const taskDragged = project.tasks.splice(indexDragged, 1)[0];
-
+        //Add the dragged task back to the array at the position of the taget task
         project.tasks.splice(indexTarget, 0, taskDragged);
-
+        //change the status of the dragged task
         draggedTask.current.status = draggedToTask.current.status;
-
+        //set the state
         setProject({ ...project });
     }
 
